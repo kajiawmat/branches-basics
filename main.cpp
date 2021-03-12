@@ -1,25 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
-int const N=30;
 int main()
 {
-	printf("\nFirst of all, let's calculate the Fibonacci numbers\n using a static matrix(triangle of Pascal), which will take up extra memory.\n\n");
-	//Перевод: в первую очередь, вычислим числа фибонначи с помощью статической матрицы, которая будет занимать лишнюю память.
-	int i,j;
-	int C[100][100],FI[100];
+	printf("\nDue to the fact that the static massive takes up too much space, \nthe bosses urgently demanded to use dynamic massives\n\n");
+	//Перевод: в силу того, что статический массив занимает слишком много места, начальство потребовало срочно воспользоваться динамическими массивами.
+	int i,j,n;
+	int FI[100]={0};
+	int **C;
 	float e,Gold,rat,rat1,dif;
-	printf("Please, input precision of number: ");
+	printf("Please, input size of massive:\t ");
+	scanf("%i",&n);
+	printf("Please, input precision of number:\t ");
 	scanf("%f",&e);
-	for(i=0;i<N;i++)
-	{
+	C= new int* [n];
+	for(i=0;i<n;i++)
+	{	
+		C[i]= new int [i+1];
 		for(j=0;j<=i;j++)
 		{
-			if(j==0 && j==i) C[i][j]=1;
+			if(j==0 || j==i) C[i][j]=1;
 			else C[i][j]=C[i-1][j-1]+C[i-1][j]; //Я создал треугольник Паскаля
 		}
 	}
 	//Теперь давайте вычислим с помощью него числа фибоначчи (не зря ведь я увлекаюсь математикой);
-	for(int k=0;k<N;k++)
+	for(int k=0;k<n;k++)
 	{
 		i=k;
 		j=0;
@@ -30,7 +34,7 @@ int main()
 			j++;
 		}
 	}
-	//Так как отношение между близкостоящими числа
+	//Так как отношение между близкостоящими числами стремится к золотому сечению, то
 	rat=(double)FI[1]/FI[0];
 	rat1=(double)FI[2]/FI[1];
 	i=1;
@@ -39,7 +43,7 @@ int main()
 	while(dif>e)
 	{
 		i++;
-		if(i==(N-1)) 
+		if(i==(n-1)) 
 		{
 			printf("Massive of numbers is too small for this");
 			break;
@@ -51,5 +55,10 @@ int main()
 	}
 	Gold=rat1;
 	printf("\n\nGolden ratio is equal:\t %f",Gold);
+	for(i=0;i<n;i++)
+	{
+		delete []C[i];
+	}
+	delete []C;
 	return 0;
 }
