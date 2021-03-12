@@ -5,13 +5,14 @@ int main()
 	printf("\nDue to the fact that the static massive takes up too much space, \nthe bosses urgently demanded to use dynamic massives\n\n");
 	//Перевод: в силу того, что статический массив занимает слишком много места, начальство потребовало срочно воспользоваться динамическими массивами.
 	int i,j,n;
-	int FI[100]={0};
+	int* FI;
 	int **C;
 	float e,Gold,rat,rat1,dif;
 	printf("Please, input size of massive:\t ");
 	scanf("%i",&n);
 	printf("Please, input precision of number:\t ");
 	scanf("%f",&e);
+	FI= new int [n];
 	C= new int* [n];
 	for(i=0;i<n;i++)
 	{	
@@ -21,6 +22,10 @@ int main()
 			if(j==0 || j==i) C[i][j]=1;
 			else C[i][j]=C[i-1][j-1]+C[i-1][j]; //Я создал треугольник Паскаля
 		}
+	}
+	for(i=0;i<n;i++)
+	{
+		FI[i]=0;
 	}
 	//Теперь давайте вычислим с помощью него числа фибоначчи (не зря ведь я увлекаюсь математикой);
 	for(int k=0;k<n;k++)
@@ -60,5 +65,6 @@ int main()
 		delete []C[i];
 	}
 	delete []C;
+	delete []FI;
 	return 0;
 }
