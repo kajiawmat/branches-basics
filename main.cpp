@@ -3,34 +3,20 @@
 int const N=30;
 int main()
 {
-	printf("\nFirst of all, let's calculate the Fibonacci numbers\n using a static matrix(triangle of Pascal), which will take up extra memory.\n\n");
-	//Перевод: в первую очередь, вычислим числа фибонначи с помощью статической матрицы, которая будет занимать лишнюю память.
-	int i,j;
-	int C[100][100],FI[100];
+	printf("\nIn this branch \"we decided\" modify this algoritm Thanks to cycle.\n\n");
+	//Перевод: В этой ветке мы решили модифицировать алгоритм с помощью цикла (а то зачем нам массив в самом деле).
+	int i;
+	int FI[N];
 	float e,Gold,rat,rat1,dif;
 	printf("Please, input precision of number: ");
 	scanf("%f",&e);
-	for(i=0;i<N;i++)
+	FI[0]=1;
+	FI[1]=1;
+	for(i=2;i<N;i++)
 	{
-		for(j=0;j<=i;j++)
-		{
-			if(j==0 && j==i) C[i][j]=1;
-			else C[i][j]=C[i-1][j-1]+C[i-1][j]; //Я создал треугольник Паскаля
-		}
+		FI[i]=FI[i-1]+FI[i-2];
 	}
-	//Теперь давайте вычислим с помощью него числа фибоначчи (не зря ведь я увлекаюсь математикой);
-	for(int k=0;k<N;k++)
-	{
-		i=k;
-		j=0;
-		while(j<=i)
-		{
-			FI[k]+=C[i][j];	//Я не буду объяснять почему это числа Фибоначчи, примите как данность;
-			i--;
-			j++;
-		}
-	}
-	//Так как отношение между близкостоящими числа
+	//Так как отношение между близкостоящими числами стремится к золотому сечению, то
 	rat=(double)FI[1]/FI[0];
 	rat1=(double)FI[2]/FI[1];
 	i=1;
