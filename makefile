@@ -8,4 +8,6 @@ prog: main.o
 main.o: main.cpp
 	g++ $(CFLAGS) -c main.cpp
 
-clean: rm -rf *.o *.exe
+clean:
+	rm -rf *.o *.exe
+

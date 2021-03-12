@@ -2,42 +2,21 @@
 #include<stdlib.h>
 int main()
 {
-	printf("\nDue to the fact that the static massive takes up too much space, \nthe bosses urgently demanded to use dynamic massives\n\n");
-	//Перевод: в силу того, что статический массив занимает слишком много места, начальство потребовало срочно воспользоваться динамическими массивами.
-	int i,j,n;
+	printf("\nIn this branch \"we decided\" modify this algoritm Thanks to cycle.\n\n");
+	//Перевод: В этой ветке мы решили модифицировать алгоритм с помощью цикла (а то зачем нам массив в самом деле).
+	int i,n;
 	int* FI;
-	int **C;
 	float e,Gold,rat,rat1,dif;
-	printf("Please, input size of massive:\t ");
+	printf("Please, input precision of number: ");
 	scanf("%i",&n);
-	printf("Please, input precision of number:\t ");
+	printf("Please, input precision of number: ");
 	scanf("%f",&e);
-	FI= new int [n];
-	C= new int* [n];
-	for(i=0;i<n;i++)
-	{	
-		C[i]= new int [i+1];
-		for(j=0;j<=i;j++)
-		{
-			if(j==0 || j==i) C[i][j]=1;
-			else C[i][j]=C[i-1][j-1]+C[i-1][j]; //Я создал треугольник Паскаля
-		}
-	}
-	for(i=0;i<n;i++)
+	FI=(int *) malloc(n*sizeof(int));
+	FI[0]=1;
+	FI[1]=1;
+	for(i=2;i<n;i++)
 	{
-		FI[i]=0;
-	}
-	//Теперь давайте вычислим с помощью него числа фибоначчи (не зря ведь я увлекаюсь математикой);
-	for(int k=0;k<n;k++)
-	{
-		i=k;
-		j=0;
-		while(j<=i)
-		{
-			FI[k]+=C[i][j];	//Я не буду объяснять почему это числа Фибоначчи, примите как данность;
-			i--;
-			j++;
-		}
+		FI[i]=FI[i-1]+FI[i-2];
 	}
 	//Так как отношение между близкостоящими числами стремится к золотому сечению, то
 	rat=(double)FI[1]/FI[0];
@@ -60,11 +39,6 @@ int main()
 	}
 	Gold=rat1;
 	printf("\n\nGolden ratio is equal:\t %f",Gold);
-	for(i=0;i<n;i++)
-	{
-		delete []C[i];
-	}
-	delete []C;
-	delete []FI;
+	free(FI);
 	return 0;
 }
