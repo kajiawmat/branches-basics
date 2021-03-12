@@ -1,18 +1,20 @@
 #include<stdio.h>
 #include<stdlib.h>
-int const N=30;
 int main()
 {
 	printf("\nIn this branch \"we decided\" modify this algoritm Thanks to cycle.\n\n");
 	//Перевод: В этой ветке мы решили модифицировать алгоритм с помощью цикла (а то зачем нам массив в самом деле).
-	int i;
-	int FI[N];
+	int i,n;
+	int* FI;
 	float e,Gold,rat,rat1,dif;
 	printf("Please, input precision of number: ");
+	scanf("%i",&n);
+	printf("Please, input precision of number: ");
 	scanf("%f",&e);
+	FI=(int *) malloc(n*sizeof(int));
 	FI[0]=1;
 	FI[1]=1;
-	for(i=2;i<N;i++)
+	for(i=2;i<n;i++)
 	{
 		FI[i]=FI[i-1]+FI[i-2];
 	}
@@ -25,7 +27,7 @@ int main()
 	while(dif>e)
 	{
 		i++;
-		if(i==(N-1)) 
+		if(i==(n-1)) 
 		{
 			printf("Massive of numbers is too small for this");
 			break;
@@ -37,5 +39,6 @@ int main()
 	}
 	Gold=rat1;
 	printf("\n\nGolden ratio is equal:\t %f",Gold);
+	free(FI);
 	return 0;
 }
